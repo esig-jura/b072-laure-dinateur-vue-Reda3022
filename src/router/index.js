@@ -1,23 +1,37 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import PageAccueil from '@/views/PageAccueil.vue'
+import PageContact from '@/views/PageContact.vue'
+import PageInformations from '@/views/PageInformations.vue'
+
+
+//Étape 6 - Modifier le titre du document HTML via le routeur <title>
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: HomeView
+      name: 'accueil',
+      component: PageAccueil,
+      meta: { titre: 'Laure Dinateur | Graphiste' }
     },
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/AboutView.vue')
+      path: '/contact',
+      name: 'contact',
+      component: PageContact,
+      meta: { titre: 'Me contacter | Laure Dinateur' }
+    },
+    {
+      path: '/infos/',
+      name: 'infos',
+      component: PageInformations,
+      meta: { titre: 'Informations | Laure Dinateur' }
     }
   ]
 })
 
+// Changement du tire <title> de la page
+router.afterEach((to) => {
+  document.title = to.meta.titre
+})
 export default router
